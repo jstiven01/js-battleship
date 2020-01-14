@@ -1,6 +1,7 @@
 const gameBoard = () => {
     const board = [...Array(10)].map(() => Array(10).fill(null));
     let shipsPositions = [];
+    let isAHit;
 
     const renderShipOnBoard = (ship, position, orientation) => {
         if(orientation ==='V'){
@@ -60,8 +61,27 @@ const gameBoard = () => {
 
     }
 
+    const isHitShip = (position) => {
+        for(let i = 0; i < shipsPositions.length; i+=1) {
+            const initialCol = shipsPositions[i].position.column;
+            const initialRow = shipsPositions[i].position.row;
+            if(shipsPositions[i].orientation === 'V' && initialCol === position.column
+            && position.row - initialRow >= 0 && position.row - initialRow <= shipsPositions[i].ship.length - 1) {
+                shipsPositions[i].Ship.hit(position.row - initialRow);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const getHit = () => isAHit;
+
+    const receiveAttack = (position) => {
+        isAHit = isHitShip(position);
+    }
+
     return {
-        placeShip,
+        placeShip, receiveAttack, getHit
     }
 
 }

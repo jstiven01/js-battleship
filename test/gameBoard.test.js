@@ -119,7 +119,7 @@ test.only('receiving attack with hitting a vertical ship', ()=>{
     gameBoardHuman.placeShip(ship1, initialPosition1, orientation1);
     const attackedPosition = {row: 5, column: 4}
     gameBoardHuman.receiveAttack(attackedPosition);
-    expect(gameBoardHuman.isAHit()).toBe(true);
+    expect(gameBoardHuman.getHit()).toBe(true);
     expect(gameBoardHuman.isOver()).toBe(true);
 });
 
