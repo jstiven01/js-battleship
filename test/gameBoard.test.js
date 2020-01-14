@@ -11,7 +11,7 @@ test('placing one ship', ()=> {
 
 });
 
-test.only('placing ship in a taken position', () => {
+test.only('placing ship in a taken position both of them vertical', () => {
     const ship1 = Ship(3);
     const gameBoardHuman = gameBoard();
     const initialPosition1 = { row: 3, column: 9};
@@ -22,4 +22,8 @@ test.only('placing ship in a taken position', () => {
     expect(isTaken).toBe(false);
 
 });
+
+test.todo('placing ship in a taken position both of them Horizontal');
+test.todo('placing ship in same occupied position oldHorizontal NewVertical');
+test.todo('placing ship in available position oldHorizontal newVertical');
 
