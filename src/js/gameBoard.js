@@ -65,23 +65,35 @@ const gameBoard = () => {
         for(let i = 0; i < shipsPositions.length; i+=1) {
             const initialCol = shipsPositions[i].position.column;
             const initialRow = shipsPositions[i].position.row;
+
             if(shipsPositions[i].orientation === 'V' && initialCol === position.column
-            && position.row - initialRow >= 0 && position.row - initialRow <= shipsPositions[i].ship.length - 1) {
-                shipsPositions[i].Ship.hit(position.row - initialRow);
+            && position.row - initialRow >= 0 
+            && position.row - initialRow <= shipsPositions[i].ship.length - 1) {
+                shipsPositions[i].ship.hit(position.row - initialRow);
+                if(shipsPositions[i].ship.isSunk()) shipsPositions.splice(i, 1);
                 return true;
+            }
+            if(shipsPositions[i].orientation === 'H' && initialRow === position.row
+            && position.column - initialCol >= 0 
+            && position.column - initialCol <= shipsPositions[i].ship.length - 1){
+                shipsPositions[i].ship.hit(position.column - initialCol);
+                if(shipsPositions[i].ship.isSunk()) shipsPositions.splice(i, 1);
+               return true;
             }
         }
         return false;
     }
 
     const getHit = () => isAHit;
+    const isOver = () => shipsPositions.length === 0;
 
     const receiveAttack = (position) => {
         isAHit = isHitShip(position);
+        ///we are here saveAttack();
     }
 
     return {
-        placeShip, receiveAttack, getHit
+        placeShip, receiveAttack, getHit, isOver
     }
 
 }

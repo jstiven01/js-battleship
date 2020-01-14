@@ -1,19 +1,20 @@
 const Ship = (length) => {
-  const ship = Array(length).fill(false);
+  const shipArray = Array(length).fill(false);
   
   const hit = (position) => {
-    if (ship[position] === false) {
-      ship[position] = true;
+    if (shipArray[position] === false) {
+      shipArray[position] = true;
     }
   }
 
   const isSunk = () => {
-    return ship.every((position) => position === true);
+    return shipArray.every((position) => position === true);
   }
 
   const getType = () => `${length}`;
 
-  return { hit, isSunk, getType, length }
+
+  return { hit, isSunk, getType, length, }
 }
 
 export default Ship;
