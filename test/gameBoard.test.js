@@ -111,3 +111,15 @@ test('placing ship in available  OldVertical NewHorizontal', () => {
     expect(isTaken).toBe(true);
 });
 
+test.only('receiving attack with hitting a vertical ship', ()=>{
+    const ship1 = Ship(3);
+    const gameBoardHuman = gameBoard();
+    const initialPosition1 = { row: 4, column: 4};
+    const orientation1 = 'V';
+    gameBoardHuman.placeShip(ship1, initialPosition1, orientation1);
+    const attackedPosition = {row: 5, column: 4}
+    gameBoardHuman.receiveAttack(attackedPosition);
+    expect(gameBoardHuman.isAHit()).toBe(true);
+    expect(gameBoardHuman.isOver()).toBe(true);
+});
+
