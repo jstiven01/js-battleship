@@ -13,7 +13,7 @@ const Ship = (length) => {
 
   const getType = () => `${length}`;
 
-  return { hit, isSunk, getType }
+  return { hit, isSunk, getType, length }
 }
 
 export default Ship;

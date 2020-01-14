@@ -1,6 +1,6 @@
 import Ship from '../src/js/ship';
 
-test('hiting the position in a ship and checking the ship is not sunk', () => {
+test('hitting the position in a ship and checking the ship is not sunk', () => {
   const ship = Ship(3);
   ship.hit(0);
   expect(ship.isSunk()).toBe(false);
