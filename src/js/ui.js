@@ -43,8 +43,17 @@ const UI = (() => {
     boardPlayer2.classList.toggle('disable-player');
   };
 
+  const renderMessage = (player, board = null) => {
+    const messageContainer = document.querySelector('.message');
+    messageContainer.innerHTML = '';
+    messageContainer.innerHTML = `${player.name} is attacking.`
+    if (board && board.isOver()) {
+      messageContainer.innerHTML = `${player.name} won the game.`
+    }
+  }
+
   return {
-    renderInitialBoards, renderAttack, disablePlayer,
+    renderInitialBoards, renderAttack, disablePlayer, renderMessage
   };
 })();
 

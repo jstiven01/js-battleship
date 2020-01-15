@@ -4,8 +4,9 @@ import Player from './js/player';
 import Ship from './js/ship';
 import UI from './js/ui';
 
-const arrayShipsH = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
-const arrayShipsC = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
+const arrayShipsH = [Ship(2)];
+const arrayShipsC = [Ship(2)];
+// const arrayShipsC = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
 const gameBoardH = GameBoard();
 const gameBoardC = GameBoard();
 const playerComputer = Player('Player Computer', 'C', arrayShipsC);
@@ -34,12 +35,18 @@ const playHuman = (event) => {
     if (gameBoardC.getHit()) {
       playerHuman.setTurn(true);
       playerComputer.setTurn(false);
+      UI.renderMessage(playerHuman);
     } else {
       playerHuman.setTurn(false);
       playerComputer.setTurn(true);
       UI.disablePlayer();
+      UI.renderMessage(playerComputer);
       sectionPlayer1.dispatchEvent(eventComputer);
     }
+  } else if (gameBoardC.isOver()) {
+    UI.renderMessage(playerHuman, gameBoardC)
+  } else if (gameBoardH.isOver()) {
+    UI.renderMessage(playComputer, gameBoardH)
   }
 };
 
@@ -51,6 +58,7 @@ const playComputer = (event) => {
     if (gameBoardH.getHit()) {
       playerHuman.setTurn(false);
       playerComputer.setTurn(true);
+      UI.renderMessage(playerComputer);
       setTimeout(() => {
         sectionPlayer1.dispatchEvent(eventComputer);
       }, 2000);
@@ -58,7 +66,12 @@ const playComputer = (event) => {
       setTimeout(UI.disablePlayer, 2000);
       playerHuman.setTurn(true);
       playerComputer.setTurn(false);
+      UI.renderMessage(playerHuman);
     }
+  } else if (gameBoardC.isOver()) {
+    UI.renderMessage(playerHuman, gameBoardC)
+  } else if (gameBoardH.isOver()) {
+    UI.renderMessage(playComputer, gameBoardH)
   }
 };
 
