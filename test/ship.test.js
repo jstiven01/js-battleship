@@ -16,4 +16,4 @@ test('checking if the ship is sunk', () => {
 test('checking type of ship', () => {
   const ship = Ship(2);
   expect(ship.getType()).toBe('2');
-})
+});
