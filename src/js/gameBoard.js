@@ -87,13 +87,23 @@ const gameBoard = () => {
     const getHit = () => isAHit;
     const isOver = () => shipsPositions.length === 0;
 
-    const receiveAttack = (position) => {
-        isAHit = isHitShip(position);
-        ///we are here saveAttack();
+    const saveAttack = (position) => { 
+        if (isAHit) {
+            board[position.row][position.column] = 'X';
+        } else {
+            board[position.row][position.column] = 'M';
+        }
     }
 
+    const receiveAttack = (position) => {
+        isAHit = isHitShip(position);
+        saveAttack(position);
+    }
+
+    const getBoard = () => board;
+
     return {
-        placeShip, receiveAttack, getHit, isOver
+        placeShip, receiveAttack, getHit, isOver, getBoard
     }
 
 }
