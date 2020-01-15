@@ -1,10 +1,14 @@
 const Player = (name, type, arrayShips) => {
-  const randomPosition = (length) => {
+  let turn;
+
+  const randomPosition = (length = 0) => {
     while (true) {
       const row = Math.round(Math.random() * 9);
       const column = Math.round(Math.random() * 9);
-      if (row + length < 10 && column + length < 10) {
+      if (length !== 0 && row + length < 10 && column + length < 10) {
         return { row, column };
+      } if (length === 0) {
+        return { row, column }
       }
     }
   };
@@ -20,8 +24,22 @@ const Player = (name, type, arrayShips) => {
     }
   };
 
+  const getTurn = () => turn;
+
+  const setTurn = (boolean) => { turn = boolean; };
+
+  const attackRival = (board, position = {}) => {
+    if (type === 'C') {
+      let newPosition = randomPosition();
+      board.receiveAttack(newPosition);
+    } else {
+      board.receiveAttack(position);
+    }
+    
+  }
+
   return {
-    name, type, setShips,
+    name, type, setShips, getTurn, setTurn, attackRival
   };
 };
 export default Player;
