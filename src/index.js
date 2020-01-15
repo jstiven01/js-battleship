@@ -1,1 +1,1 @@
-console.log('basic setup');
+import './scss/style.scss';

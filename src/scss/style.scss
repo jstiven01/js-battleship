@@ -1,0 +1,64 @@
+@import "~bootstrap/scss/bootstrap";
+
+.size-board{
+    height: 50px;
+
+}
+.size-button {
+ width : 34px;
+}
+#board-player-1 {
+    pointer-events: none;
+}
+
+.color-button-5 {
+    background-color: red;
+}
+.color-button-4 {
+    background-color: yellow;
+}
+.color-button-3 {
+    background-color: green;
+}
+.color-button-2 {
+    background-color: pink;
+}
+.color-button-null {
+    background-color : gray;
+}
+
+.disable-player {
+    pointer-events: none;
+    opacity: 0.5
+}
+
+.color-button-X {
+    background-image: url(../img/explosion.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.color-button-M {
+    background-image: url(../img/missedshot.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.main-background{
+    background-image: url(../img/ship.jpg);
+     background-size: cover;
+     height: 100vh;
+}
+
+h1,h3 { 
+    color: white !important;
+    font-weight : bold; 
+}
+h1 {
+    font-size: 50px !important;
+}
+.versus {
+    font-size: 86px !important;
+    color: white;
+
+}
