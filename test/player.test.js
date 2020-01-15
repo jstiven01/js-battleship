@@ -23,3 +23,24 @@ describe('Creating Players and setting ships', () => {
     expect(gameBoardH.isOver()).toBe(false);
   });
 });
+
+describe('Attacking ships among players', ()=> {
+    const arrayShipsH = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
+    const arrayShipsC = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
+    let gameBoardH = GameBoard();
+    let gameBoardC = GameBoard();
+    const playerComputer = Player('Player Computer', 'C', arrayShipsC);
+    const playerHuman = Player('Player Human', 'H', arrayShipsH);
+
+    beforeEach(()=> {
+        const ship1 = Ship(3);
+        const shipPosition1 = { row: 2, column: 4 };
+        const orientation1 = 'H';
+        gameBoardC.placeShip(ship1, shipPosition1, orientation1);
+
+    })
+    
+
+
+
+});
