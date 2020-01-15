@@ -7,7 +7,25 @@
     <title>BattleShip</title>
 </head>
 <body>
+    <div class="container-fluid main-background">
+        <h1 class='text-center'>BATTLESHIP</h1>
+        <div class="row d-flex justify-content-between">
+            <div class="col-5 text-center" id="section-player-1">
+                <h3>Player Human's Board</h3>
+                <div class="board-buttons" id="board-player-1"></div>
+            </div>
+            <div class="col-2 versus text-center align-self-center">
+                VS
+             </div>
+            <div class="col-5 text-center" id="section-player-2">
+                <h3>Computer's Board</h3>
+                <div class="board-buttons" id="board-player-2"></div>
+            </div>
+        </div>
+        <div class="col-5 mx-auto alert alert-success text-center my-3">
+            Let's begin the war. Player human is time to attack!!
+        </div>
+    </div>
     <script src="main.js"></script>
-    
 </body>
 </html>
