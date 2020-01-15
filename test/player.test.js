@@ -24,47 +24,43 @@ describe('Creating Players and setting ships', () => {
   });
 });
 
-describe('Attacking ships among players', ()=> {
-    const arrayShipsH = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
-    const arrayShipsC = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
-    let gameBoardH = GameBoard();
-    let gameBoardC = GameBoard();
-    const playerComputer = Player('Player Computer', 'C', arrayShipsC);
-    const playerHuman = Player('Player Human', 'H', arrayShipsH);
+describe('Attacking ships among players', () => {
+  const arrayShipsH = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
+  const arrayShipsC = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
+  const gameBoardH = GameBoard();
+  const gameBoardC = GameBoard();
+  const playerComputer = Player('Player Computer', 'C', arrayShipsC);
+  const playerHuman = Player('Player Human', 'H', arrayShipsH);
 
-    beforeEach(()=> {
-        const ship1 = Ship(3);
-        const shipPosition1 = { row: 2, column: 4 };
-        const orientation1 = 'H';
-        const ship2 = Ship(3);
-        gameBoardC.placeShip(ship1, shipPosition1, orientation1);
-        gameBoardH.placeShip(ship2, shipPosition1, orientation1);
-
-    });
-
-    test('Player Human make a missed attack and change turn to Computer', () => {
-        playerHuman.attackRival(gameBoardC, {row: 4, column: 5});
-        playerHuman.setTurn(false);
-        playerComputer.setTurn(true);
-        expect(gameBoardC.isOver()).toBe(false);
-        expect(playerHuman.getTurn()).toBe(false);
-        expect(playerComputer.getTurn()).toBe(true);
-    });
-
-    test('Player Computer make a attack', () => {
-      playerComputer.attackRival(gameBoardH);
-      expect(gameBoardH.isOver()).toBe(false);
+  beforeEach(() => {
+    const ship1 = Ship(3);
+    const shipPosition1 = { row: 2, column: 4 };
+    const orientation1 = 'H';
+    const ship2 = Ship(3);
+    gameBoardC.placeShip(ship1, shipPosition1, orientation1);
+    gameBoardH.placeShip(ship2, shipPosition1, orientation1);
   });
 
-  test.only('Player Human make a hit attack and keep turn', () => {
-    playerHuman.attackRival(gameBoardC, {row: 2, column: 4});
+  test('Player Human make a missed attack and change turn to Computer', () => {
+    playerHuman.attackRival(gameBoardC, { row: 4, column: 5 });
+    playerHuman.setTurn(false);
+    playerComputer.setTurn(true);
+    expect(gameBoardC.isOver()).toBe(false);
+    expect(playerHuman.getTurn()).toBe(false);
+    expect(playerComputer.getTurn()).toBe(true);
+  });
+
+  test('Player Computer make an attack', () => {
+    playerComputer.attackRival(gameBoardH);
+    expect(gameBoardH.isOver()).toBe(false);
+  });
+
+  test('Player Human make a hit attack and keep turn', () => {
+    playerHuman.attackRival(gameBoardC, { row: 2, column: 4 });
     playerHuman.setTurn(true);
     playerComputer.setTurn(false);
     expect(gameBoardC.isOver()).toBe(false);
     expect(playerHuman.getTurn()).toBe(true);
     expect(playerComputer.getTurn()).toBe(false);
-});
-
-
-
+  });
 });

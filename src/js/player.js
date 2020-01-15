@@ -1,5 +1,6 @@
 const Player = (name, type, arrayShips) => {
   let turn;
+  const computerAttacks = [];
 
   const randomPosition = (length = 0) => {
     while (true) {
@@ -7,8 +8,9 @@ const Player = (name, type, arrayShips) => {
       const column = Math.round(Math.random() * 9);
       if (length !== 0 && row + length < 10 && column + length < 10) {
         return { row, column };
-      } if (length === 0) {
-        return { row, column }
+      } if (length === 0
+        && computerAttacks.filter((pos) => pos.row === row && pos.column === column).length === 0) {
+        return { row, column };
       }
     }
   };
@@ -30,16 +32,16 @@ const Player = (name, type, arrayShips) => {
 
   const attackRival = (board, position = {}) => {
     if (type === 'C') {
-      let newPosition = randomPosition();
+      const newPosition = randomPosition();
+      computerAttacks.push(newPosition);
       board.receiveAttack(newPosition);
     } else {
       board.receiveAttack(position);
     }
-    
-  }
+  };
 
   return {
-    name, type, setShips, getTurn, setTurn, attackRival
+    name, type, setShips, getTurn, setTurn, attackRival,
   };
 };
 export default Player;
