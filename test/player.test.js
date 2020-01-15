@@ -38,7 +38,17 @@ describe('Attacking ships among players', ()=> {
         const orientation1 = 'H';
         gameBoardC.placeShip(ship1, shipPosition1, orientation1);
 
-    })
+    });
+
+    test('Player Human make an missed attack and change turn to Computer', ()=> {
+        playerHuman.attackRival(gameBoardC, {row: 4, column: 5});
+        playerHuman.setTurn(false);
+        playerComputer.setTurn(true);
+        expect(gameBoardC.isOver()).toBe(false);
+        expect(playerHuman.getTurn()).toBe(false);
+        expect(playerComputer.getTurn()).toBe(true);
+    });
+
     
 
 
