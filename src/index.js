@@ -1,9 +1,8 @@
 import './scss/style.scss';
-import GameBoard from '../src/js/gameBoard';
-import Player from '../src/js/player';
-import Ship from '../src/js/ship';
-import UI from '../src/js/ui'
-import gameBoard from '../src/js/gameBoard';
+import GameBoard from './js/gameBoard';
+import Player from './js/player';
+import Ship from './js/ship';
+import UI from './js/ui';
 
 const arrayShipsH = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
 const arrayShipsC = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
@@ -22,20 +21,46 @@ UI.renderInitialBoards(playerHuman, gameBoardH);
 UI.renderInitialBoards(playerComputer, gameBoardC);
 
 const buttons = document.querySelectorAll('.button-position-player2');
+console.log(gameBoardC.getBoard());
+const eventComputer = new Event('EventComputer');
+const sectionPlayer1 = document.getElementById('section-player-1');
 
 const playHuman = (event) => {
   if (!gameBoardC.isOver() && playerHuman.getTurn() && !gameBoardH.isOver()) {
     const row = parseInt(event.target.dataset.row, 10);
     const column = parseInt(event.target.dataset.column, 10);
-    playerHuman.attackRival(gameBoardC, {row, column});
+    playerHuman.attackRival(gameBoardC, { row, column });
+    UI.renderAttack(playerComputer, gameBoardC, { row, column }, event);
     if (gameBoardC.getHit()) {
       playerHuman.setTurn(true);
       playerComputer.setTurn(false);
     } else {
       playerHuman.setTurn(false);
       playerComputer.setTurn(true);
+      UI.disablePlayer();
+      sectionPlayer1.dispatchEvent(eventComputer);
     }
   }
-}
+};
 
-buttons.forEach(button => button.addEventListener('click', playHuman));
+const playComputer = (event) => {
+  console.log('this is PC', event);
+  if (!gameBoardC.isOver() && playerComputer.getTurn() && !gameBoardH.isOver()) {
+    playerComputer.attackRival(gameBoardH);
+    UI.renderAttack(playerHuman, gameBoardH);
+    if (gameBoardH.getHit()) {
+      playerHuman.setTurn(false);
+      playerComputer.setTurn(true);
+      setTimeout(() => {
+        sectionPlayer1.dispatchEvent(eventComputer);
+      }, 2000);
+    } else {
+      setTimeout(UI.disablePlayer, 2000);
+      playerHuman.setTurn(true);
+      playerComputer.setTurn(false);
+    }
+  }
+};
+
+buttons.forEach((button) => button.addEventListener('click', playHuman));
+sectionPlayer1.addEventListener('EventComputer', playComputer);

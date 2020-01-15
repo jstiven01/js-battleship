@@ -36,12 +36,14 @@
     background-image: url(../img/explosion.png);
     background-size: cover;
     background-position: center;
+    pointer-events: none;
 }
 
 .color-button-M {
     background-image: url(../img/missedshot.png);
     background-size: cover;
     background-position: center;
+    pointer-events: none;
 }
 
 .main-background{
