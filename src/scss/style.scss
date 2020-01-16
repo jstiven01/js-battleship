@@ -4,6 +4,9 @@
     height: 50px;
 
 }
+body {
+    overflow: hidden;
+}
 .size-button {
  width : 34px;
 }
@@ -48,8 +51,8 @@
 
 .main-background{
     background-image: url(../img/ship.jpg);
-     background-size: cover;
-     height: 100vh;
+     background-size: auto;
+     height: 150vh;
 }
 
 h1,h3 { 

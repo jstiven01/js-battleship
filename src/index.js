@@ -4,9 +4,8 @@ import Player from './js/player';
 import Ship from './js/ship';
 import UI from './js/ui';
 
-const arrayShipsH = [Ship(2)];
-const arrayShipsC = [Ship(2)];
-// const arrayShipsC = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
+const arrayShipsH = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
+const arrayShipsC = [Ship(5), Ship(4), Ship(3), Ship(3), Ship(2)];
 const gameBoardH = GameBoard();
 const gameBoardC = GameBoard();
 const playerComputer = Player('Player Computer', 'C', arrayShipsC);
@@ -22,7 +21,6 @@ UI.renderInitialBoards(playerHuman, gameBoardH);
 UI.renderInitialBoards(playerComputer, gameBoardC);
 
 const buttons = document.querySelectorAll('.button-position-player2');
-console.log(gameBoardC.getBoard());
 const eventComputer = new Event('EventComputer');
 const sectionPlayer1 = document.getElementById('section-player-1');
 
@@ -35,43 +33,38 @@ const playHuman = (event) => {
     if (gameBoardC.getHit()) {
       playerHuman.setTurn(true);
       playerComputer.setTurn(false);
-      UI.renderMessage(playerHuman);
+      UI.renderMessage(playerHuman, gameBoardC);
     } else {
       playerHuman.setTurn(false);
       playerComputer.setTurn(true);
       UI.disablePlayer();
-      UI.renderMessage(playerComputer);
-      sectionPlayer1.dispatchEvent(eventComputer);
+      UI.renderMessage(playerComputer, gameBoardH);
+      setTimeout(() => {
+        sectionPlayer1.dispatchEvent(eventComputer);
+      }, 1000);
     }
-  } else if (gameBoardC.isOver()) {
-    UI.renderMessage(playerHuman, gameBoardC)
-  } else if (gameBoardH.isOver()) {
-    UI.renderMessage(playComputer, gameBoardH)
   }
 };
 
-const playComputer = (event) => {
-  console.log('this is PC', event);
+const playComputer = () => {
   if (!gameBoardC.isOver() && playerComputer.getTurn() && !gameBoardH.isOver()) {
     playerComputer.attackRival(gameBoardH);
     UI.renderAttack(playerHuman, gameBoardH);
     if (gameBoardH.getHit()) {
       playerHuman.setTurn(false);
       playerComputer.setTurn(true);
-      UI.renderMessage(playerComputer);
+      UI.renderMessage(playerComputer, gameBoardH);
       setTimeout(() => {
         sectionPlayer1.dispatchEvent(eventComputer);
-      }, 2000);
+      }, 1000);
     } else {
-      setTimeout(UI.disablePlayer, 2000);
+      setTimeout(() => {
+        UI.disablePlayer();
+        UI.renderMessage(playerHuman, gameBoardC);
+      }, 1000);
       playerHuman.setTurn(true);
       playerComputer.setTurn(false);
-      UI.renderMessage(playerHuman);
     }
-  } else if (gameBoardC.isOver()) {
-    UI.renderMessage(playerHuman, gameBoardC)
-  } else if (gameBoardH.isOver()) {
-    UI.renderMessage(playComputer, gameBoardH)
   }
 };
 
