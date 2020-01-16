@@ -7,7 +7,7 @@ const Ship = (length) => {
     }
   };
 
-  const isSunk = () => shipArray.every((position) => position === true);
+  const isSunk = () => shipArray.every(position => position === true);
 
   const getType = () => `${length}`;
 

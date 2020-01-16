@@ -68,5 +68,5 @@ const playComputer = () => {
   }
 };
 
-buttons.forEach((button) => button.addEventListener('click', playHuman));
+buttons.forEach(button => button.addEventListener('click', playHuman));
 sectionPlayer1.addEventListener('EventComputer', playComputer);

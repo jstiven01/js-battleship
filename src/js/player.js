@@ -3,16 +3,23 @@ const Player = (name, type, arrayShips) => {
   const computerAttacks = [];
 
   const randomPosition = (length = 0) => {
-    while (true) {
+    let flag = true;
+    let position = {};
+
+    while (flag) {
       const row = Math.round(Math.random() * 9);
       const column = Math.round(Math.random() * 9);
       if (length !== 0 && row + length < 10 && column + length < 10) {
-        return { row, column };
-      } if (length === 0
-        && computerAttacks.filter((pos) => pos.row === row && pos.column === column).length === 0) {
-        return { row, column };
+        flag = false;
+        position = { row, column };
+      }
+      if (length === 0
+        && computerAttacks.filter(pos => pos.row === row && pos.column === column).length === 0) {
+        flag = false;
+        position = { row, column };
       }
     }
+    return position;
   };
 
   const setShips = (gameBoard) => {
